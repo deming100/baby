@@ -103,9 +103,9 @@
             z-index: 20;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Changed from center */
-            padding: 20px 0; /* Add padding */
-            overflow-y: auto; /* Enable scrolling */
+            justify-content: flex-start;
+            padding: 60px 0 20px; /* Added top padding for button space */
+            overflow-y: auto;
         }
         .memory-gallery img {
             width: 80%;
@@ -117,12 +117,16 @@
 
         }
         .close-gallery {
-            position: absolute;
+            position: fixed; /* Changed from absolute to fixed */
             top: 20px;
             right: 20px;
             font-size: 30px;
             color: white;
             cursor: pointer;
+            z-index: 30; /* Higher than gallery's z-index */
+            background: rgba(0, 0, 0, 0.5); /* Optional: better visibility */
+            padding: 5px 15px;
+            border-radius: 50%;
         }
         .star {
             position: absolute;
