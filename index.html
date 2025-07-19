@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0a0a2a, #1a1a4a);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+        }
+        .flower {
+            font-size: 20px;
+            transition: all 2s ease-out;
+            margin-bottom: 30px;
+            z-index: 2;
+        }
+        .message {
+            font-size: 24px;
+            color: #ff69b4;
+            margin-bottom: 20px;
+            z-index: 2;
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.7);
+        }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            z-index: 2;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+            z-index: 2;
+        }
+        #yes {
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            color: white;
+        }
+        #no {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        #memoriesBtn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            display: none;
+        }
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 3s linear forwards;
+        }
+        .memory-gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 20;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .memory-gallery img {
+            width: 80%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+        .close-gallery {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+        @keyframes float {
+            to {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Twinkling Stars Background -->
+    <div id="stars"></div>
+
+    <div class="flower">🌱</div>
+    <div class="message">Alex loves Taylor! Do you love me?</div>
+    <div class="buttons">
+        <button id="yes">YES! ❤️</button>
+        <button id="no">No</button>
+    </div>
+    <button id="memoriesBtn">Our Memories 📸</button>
+    
+    <div class="hearts" id="hearts"></div>
+    
+    <!-- Memory Gallery -->
+    <div class="memory-gallery" id="memoryGallery">
+        <span class="close-gallery">✕</span>
+        <img src="https://drive.google.com/uc?export=view&id=IMG-20250521-WA0172.jpg" alt="Our memory 1"> <!-- Replace with your image URLs -->
+        <img src="https://drive.google.com/uc?export=view&id=IMG-20250425-WA0057.jpg" alt="Our memory 2">
+    </div>
+
+    <script>
+        // Personalized names (edit these!)
+        const yourName = "I";
+        const herName = "Xin yi";
+        document.querySelector('.message').textContent = `${yourName} loves ${herName}! Do you love me?`;
+
+        // Twinkling stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = `${Math.random() * 3}px`;
+                star.style.height = star.style.width;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.setProperty('--duration', `${2 + Math.random() * 3}s`);
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                starsContainer.appendChild(star);
+            }
+        }
+        createStars();
+
+        // Animate flower growth
+        setTimeout(() => {
+            const flower = document.querySelector('.flower');
+            flower.textContent = '🌸';
+            flower.style.fontSize = '100px';
+        }, 500);
+
+        // YES button: Hearts explosion
+        document.getElementById('yes').addEventListener('click', () => {
+            const hearts = document.getElementById('hearts');
+            hearts.style.display = 'block';
+            document.querySelector('.message').textContent = 'I knew it! I love you more! 💘';
+            document.querySelector('.buttons').style.display = 'none';
+            document.getElementById('memoriesBtn').style.display = 'none';
+
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.textContent = '❤️';
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.top = `${Math.random() * 100}%`;
+                    heart.style.animationDuration = `${2 + Math.random() * 2}s`;
+                    hearts.appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 50);
+            }
+        });
+
+        // NO button: Escape on press with custom messages
+        const noBtn = document.getElementById('no');
+        const noMessages = ["walao", "dun like that leh", "please la", "im on my knees", "really meh"];
+        let messageIndex = 0;
+        
+        noBtn.addEventListener('click', () => {
+            // Cycle through custom messages
+            noBtn.textContent = noMessages[messageIndex % noMessages.length];
+            messageIndex++;
+            
+            // Move to random position
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${10 + Math.random() * 70}%`;
+            noBtn.style.top = `${10 + Math.random() * 70}%`;
+            
+            // Add shake animation every few clicks
+            if (messageIndex % 3 === 0) {
+                noBtn.style.animation = 'shake 0.5s';
+                setTimeout(() => noBtn.style.animation = '', 500);
+            }
+        });
+
+        // Memories button
+        const memoriesBtn = document.getElementById('memoriesBtn');
+        const memoryGallery = document.getElementById('memoryGallery');
+        const closeGallery = document.querySelector('.close-gallery');
+
+        memoriesBtn.addEventListener('click', () => {
+            memoryGallery.style.display = 'flex';
+        });
+
+        closeGallery.addEventListener('click', () => {
+            memoryGallery.style.display = 'none';
+        });
+
+        // Close gallery when clicking outside images
+        memoryGallery.addEventListener('click', (e) => {
+            if (e.target === memoryGallery) {
+                memoryGallery.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
