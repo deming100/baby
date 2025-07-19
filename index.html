@@ -14,6 +14,12 @@
       <source src="@asumuh - its just you, my dear (lyrics).mp3" type="audio/mpeg">
       <!-- Replace with your actual memory gallery music file -->
     </audio>
+    <audio id="yesMusic">
+      <source src="dw.mp3" type="audio/mpeg">
+      <!-- Replace with your actual memory gallery music file -->
+    </audio>
+    <link rel="preload" href="@asumuh - its just you, my dear (lyrics).mp3" as="audio">
+
     
     <style>
         body {
@@ -253,26 +259,54 @@
             flower.style.fontSize = '100px';
         }, 500);
 
-        // YES button: Hearts explosion
+        // Add this audio element to your <head> section
+        const celebrationMusic = new Audio("dw.mp3");
+        celebrationMusic.volume = 0.6; // 60% volume
+        celebrationMusic.loop = true;  // Loop the celebration song
+
+        // YES button: Hearts explosion (forever version)
         document.getElementById('yes').addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent audio init from interfering
+            e.stopPropagation();
+            
+            // Music control
+            bgMusic.pause();
+            memoryMusic.pause();
+            celebrationMusic.currentTime = 0;
+            celebrationMusic.play();
+            
+            // Visual effects
             const hearts = document.getElementById('hearts');
             hearts.style.display = 'block';
             document.querySelector('.message').textContent = 'I knew it! I love you more! 💘';
             document.querySelector('.buttons').style.display = 'none';
             document.getElementById('memoriesBtn').style.display = 'none';
 
+            // Create initial hearts
             for (let i = 0; i < 100; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.textContent = '❤️';
-                    heart.style.left = `${Math.random() * 100}%`;
+                createFloatingHeart(hearts);
+            }
+
+            // Keep adding new hearts periodically
+            const heartInterval = setInterval(() => {
+                createFloatingHeart(hearts);
+            }, 300); // Add a new heart every 300ms
+
+            // Function to create a single forever-floating heart
+            function createFloatingHeart(container) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '❤️';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${5 + Math.random() * 5}s`; // Slower animation
+                container.appendChild(heart);
+                
+                // When animation completes, restart it
+                heart.addEventListener('animationend', () => {
                     heart.style.top = `${Math.random() * 100}%`;
-                    heart.style.animationDuration = `${2 + Math.random() * 2}s`;
-                    hearts.appendChild(heart);
-                    setTimeout(() => heart.remove(), 3000);
-                }, i * 50);
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.animationDuration = `${5 + Math.random() * 5}s`;
+                });
             }
         });
 
