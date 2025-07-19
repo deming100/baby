@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Love ❤️</title>
+        <!-- Add these audio elements in the head section -->
+    <audio id="bgMusic" loop>
+      <source src="aUntitled video - Made with Clipchamp.mp3" type="audio/mpeg">
+      <!-- Replace with your actual background music file -->
+    </audio>
+    
+    <audio id="memoryMusic">
+      <source src="@asumuh - its just you, my dear (lyrics).mp3" type="audio/mpeg">
+      <!-- Replace with your actual memory gallery music file -->
+    </audio>
+    
     <style>
         body {
             background: linear-gradient(to bottom, #0a0a2a, #1a1a4a);
@@ -86,14 +97,18 @@
             z-index: 20;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Changed from center */
+            padding: 20px 0; /* Add padding */
+            overflow-y: auto; /* Enable scrolling */
         }
         .memory-gallery img {
             width: 80%;
             max-width: 300px;
             border-radius: 10px;
-            margin: 10px;
+            margin: 15px 0;
             box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            scroll-margin: 20px; /* Better scroll positioning */
+
         }
         .close-gallery {
             position: absolute;
@@ -161,33 +176,76 @@
         <img src="20250522_182209.jpg" alt="Our memory 13">
         <img src="IMG-20250312-WA0000.jpg" alt="Our memory 14">
         <img src="IMG-20250424-WA0027.jpg" alt="Our memory 15">
+        <img src="IMG-20250424-WA0051.jpg" alt="Our memory 16">
+        <img src="IMG-20250424-WA0057.jpg" alt="Our memory 17">
+        <img src="IMG-20250424-WA0089.jpg" alt="Our memory 18">
+        <img src="IMG-20250425-WA0057.jpg" alt="Our memory 19">
+        <img src="IMG-20250521-WA0172.jpg" alt="Our memory 20">
+        <img src="IMG_1347.JPG" alt="Our memory 21">
+        <img src="IMG_1456.JPG" alt="Our memory 22">
+        <img src="IMG_1468.JPG" alt="Our memory 23">
+        <img src="IMG_1627.JPG" alt="Our memory 24">
+        <img src="IMG_1631.JPG" alt="Our memory 25">
+        <img src="IMG_1821.JPG" alt="Our memory 26">
+        <img src="IMG_1845.JPG" alt="Our memory 27">
+        <img src="IMG_1850.JPG" alt="Our memory 28">
+        <img src="IMG_1851.JPG" alt="Our memory 29">
+        <img src="IMG_1854.JPG" alt="Our memory 30">
+        <img src="Screenshot_20250420_173109_WhatsApp.jpg" alt="Our memory 31">
+
+
 
         
     </div>
 
     <script>
-        // Personalized names (edit these!)
-        const yourName = "I";
-        const herName = "Xin yi";
-        document.querySelector('.message').textContent = `${yourName} loves ${herName}! Do you love me?`;
+    // Personalized names
+    const yourName = "I";
+    const herName = "Xin yi";
+    document.querySelector('.message').textContent = `${yourName} loves ${herName}! Do you love me?`;
 
-        // Twinkling stars
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                star.style.width = `${Math.random() * 3}px`;
-                star.style.height = star.style.width;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.setProperty('--duration', `${2 + Math.random() * 3}s`);
-                star.style.animationDelay = `${Math.random() * 5}s`;
-                starsContainer.appendChild(star);
+    // Audio elements
+    const bgMusic = document.getElementById('bgMusic');
+    const memoryMusic = document.getElementById('memoryMusic');
+    
+    // Set volumes and loop
+    bgMusic.volume = 0.3;
+    memoryMusic.volume = 0.5;
+    memoryMusic.loop = true; // Make memory music loop
+
+    // Auto-play background music (new modern approach)
+    document.addEventListener('DOMContentLoaded', () => {
+        const playAudio = async () => {
+            try {
+                await bgMusic.play();
+                console.log("Background music started");
+            } catch (err) {
+                console.log("Auto-play prevented, will start after interaction");
+                // Fallback - start after first click
+                document.addEventListener('click', () => {
+                    bgMusic.play();
+                }, { once: true });
             }
-        }
-        createStars();
+        };
+        playAudio();
+    });
 
+    // Twinkling stars
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.width = `${Math.random() * 3}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${2 + Math.random() * 3}s`);
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(star);
+        }
+    }
+    createStars();
         // Animate flower growth
         setTimeout(() => {
             const flower = document.querySelector('.flower');
@@ -196,7 +254,8 @@
         }, 500);
 
         // YES button: Hearts explosion
-        document.getElementById('yes').addEventListener('click', () => {
+        document.getElementById('yes').addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent audio init from interfering
             const hearts = document.getElementById('hearts');
             hearts.style.display = 'block';
             document.querySelector('.message').textContent = 'I knew it! I love you more! 💘';
@@ -222,7 +281,8 @@
         const noMessages = ["walao", "dun like that leh", "please la", "im on my knees", "really meh"];
         let messageIndex = 0;
         
-        noBtn.addEventListener('click', () => {
+        noBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent audio init from interfering
             // Cycle through custom messages
             noBtn.textContent = noMessages[messageIndex % noMessages.length];
             messageIndex++;
@@ -244,18 +304,24 @@
         const memoryGallery = document.getElementById('memoryGallery');
         const closeGallery = document.querySelector('.close-gallery');
 
-        memoriesBtn.addEventListener('click', () => {
+        memoriesBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent audio init from interfering
             memoryGallery.style.display = 'flex';
+            memoryMusic.currentTime = 0;
+            memoryMusic.play();
         });
 
-        closeGallery.addEventListener('click', () => {
+        closeGallery.addEventListener('click', (e) => {
+            e.stopPropagation();
             memoryGallery.style.display = 'none';
+            memoryMusic.pause();
         });
 
         // Close gallery when clicking outside images
         memoryGallery.addEventListener('click', (e) => {
             if (e.target === memoryGallery) {
                 memoryGallery.style.display = 'none';
+                memoryMusic.pause();
             }
         });
     </script>
