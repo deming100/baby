@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff69b4">
+<link rel="apple-touch-icon" href="Untitled design (13).png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="My Love">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Love ❤️</title>
@@ -171,37 +177,11 @@
     <!-- Memory Gallery -->
     <div class="memory-gallery" id="memoryGallery">
         <span class="close-gallery">✕</span>
-        <img src="20250211_153025.jpg" alt="Our memory 1"> <!-- Replace with your image URLs -->
-        <img src="20250211_153937.jpg" alt="Our memory 2">
-        <img src="20250224_191855.jpg" alt="Our memory 3">
-        <img src="20250329_195702.jpg" alt="Our memory 4">
-        <img src="20250329_200102.jpg" alt="Our memory 5">
-        <img src="20250331_015454.jpg" alt="Our memory 6">
-        <img src="20250404_205029.jpg" alt="Our memory 7">
-        <img src="20250423_173714.jpg" alt="Our memory 8">
-        <img src="20250424_174327.jpg" alt="Our memory 9">
-        <img src="20250504_161549.jpg" alt="Our memory 10">
-        <img src="20250504_162412.jpg" alt="Our memory 11">
-        <img src="20250520_185001.jpg" alt="Our memory 12">
-        <img src="20250522_182209.jpg" alt="Our memory 13">
-        <img src="IMG-20250312-WA0000.jpg" alt="Our memory 14">
-        <img src="IMG-20250424-WA0027.jpg" alt="Our memory 15">
-        <img src="IMG-20250424-WA0051.jpg" alt="Our memory 16">
-        <img src="IMG-20250424-WA0057.jpg" alt="Our memory 17">
-        <img src="IMG-20250424-WA0089.jpg" alt="Our memory 18">
-        <img src="IMG-20250425-WA0057.jpg" alt="Our memory 19">
-        <img src="IMG-20250521-WA0172.jpg" alt="Our memory 20">
-        <img src="IMG_1347.JPG" alt="Our memory 21">
-        <img src="IMG_1456.JPG" alt="Our memory 22">
-        <img src="IMG_1468.JPG" alt="Our memory 23">
-        <img src="IMG_1627.JPG" alt="Our memory 24">
-        <img src="IMG_1631.JPG" alt="Our memory 25">
-        <img src="IMG_1821.JPG" alt="Our memory 26">
-        <img src="IMG_1845.JPG" alt="Our memory 27">
-        <img src="IMG_1850.JPG" alt="Our memory 28">
-        <img src="IMG_1851.JPG" alt="Our memory 29">
-        <img src="IMG_1854.JPG" alt="Our memory 30">
-        <img src="Screenshot_20250420_173109_WhatsApp.jpg" alt="Our memory 31">
+        <img src="demo1.jpg" alt="Our memory 1"> <!-- Replace with your image URLs -->
+        <img src="demo2.jpg" alt="Our memory 2">
+        <img src="demo3.jpg" alt="Our memory 3">
+        <img src="demo4.jpg" alt="Our memory 4">
+      
 
 
 
@@ -209,9 +189,20 @@
     </div>
 
     <script>
+    if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+            .then(registration => {
+                console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+    }   
     // Personalized names
     const yourName = "I";
-    const herName = "You";
+    const herName = "Xin yi";
     document.querySelector('.message').textContent = `${yourName} loves ${herName}! Do you love me?`;
 
     // Audio elements
@@ -365,4 +356,3 @@
     </script>
 </body>
 </html>
-
